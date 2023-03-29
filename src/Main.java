@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
 
 public class Main extends JFrame implements ActionListener {
 
@@ -88,6 +86,8 @@ public class Main extends JFrame implements ActionListener {
                     }
                 }
 
+                //call the main panel to create the tree map with the selected directory
+                mainPanel.createTreeMap(jfc.getSelectedFile());
                 break;
             case CHOOSE_COLORS:
                 mainPanel.setCircleColor(Color.BLUE);   

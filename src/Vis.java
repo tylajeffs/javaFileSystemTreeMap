@@ -9,12 +9,29 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
+    //initial orientation
+    public static final String HORIZONTAL = "Horizontal";
+
+    //current color
     private Color currentColor;
+
+    //colors for each type of file
+    private Color documents = new Color(245,85,137);
+    private Color spreadsheet = new Color(243,131,91);
+    private Color slideshow = new Color(5,184,167);
+    private Color plainText = new Color(0,213,211);
+    private Color executable = new Color(214,218,2);
+    private Color sourceCode = new Color(159,194,31);
+    private Color objectCode = new Color(23,143,193);
+    private Color image = new Color(182,151,214);
+    private Color audio = new Color(172,228,220);
+    private Color otherFileType = new Color(102,143,30);
 
 
     public Vis() {
@@ -24,15 +41,9 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         addMouseMotionListener(this);
     }
 
-    public void setCircleColor(Color c) {
-        currentColor = c;
-        repaint();
-    }
-
-
     @Override
     public void paintComponent(Graphics g1) {
-        
+
         //typecast Graphics to Graphics2D
         Graphics2D g = (Graphics2D)g1;
 
@@ -43,9 +54,35 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         //draw some simple shapes
         g.setColor(currentColor);
         g.fillOval(100, 100, 100, 100);
-
-      
     }
+
+    /* method to set the current color */
+    public void setCircleColor(Color c) {
+        currentColor = c;
+        repaint();
+    }
+
+    /* method to create the actual tree map */
+    public void createTreeMap(File currentFolder) {
+
+        //get the folders in the current folder
+
+        //start with horizontal
+        HORIZONTAL;
+
+        //divide the screen into how many there are
+
+        //pick a color
+
+        //make a recursive call
+
+
+        repaint();
+
+    }
+
+
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
