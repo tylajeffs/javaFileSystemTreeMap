@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +72,22 @@ public class Main extends JFrame implements ActionListener {
 
         switch (cmd) {
             case CHOOSE_FOLDER:
-                mainPanel.setCircleColor(Color.RED);
+                
+                //pop up a window where user can select a folder
+                JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                jfc.setDialogTitle("Choose a folder");
+
+                //set it to only allow folders to be selected, not files
+                jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+                //debugging, what directory was returned
+                int returnValue = jfc.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    if (jfc.getSelectedFile().isDirectory()) {
+                        System.out.println("You selected the directory: " + jfc.getSelectedFile());
+                    }
+                }
+
                 break;
             case CHOOSE_COLORS:
                 mainPanel.setCircleColor(Color.BLUE);   

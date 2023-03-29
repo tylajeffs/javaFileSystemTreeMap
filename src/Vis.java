@@ -32,6 +32,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void paintComponent(Graphics g1) {
+        
         //typecast Graphics to Graphics2D
         Graphics2D g = (Graphics2D)g1;
 
