@@ -12,6 +12,7 @@ import java.awt.geom.Line2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
@@ -60,6 +61,22 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     public void setCircleColor(Color c) {
         currentColor = c;
         repaint();
+    }
+
+    /* function to generate a random color */
+    public Color generateRandomColor() {
+
+        //initialize the randomness
+        Random rand = new Random();
+
+	    //generate 3 different values for the rgb of the color
+	    float red = rand.nextFloat();
+	    float green = rand.nextFloat();
+	    float blue = rand.nextFloat();
+
+        //create the color
+	    Color randomColor = new Color(red, green, blue);
+        return randomColor;
     }
 
     /* method to create the actual tree map */
