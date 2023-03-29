@@ -17,12 +17,12 @@ import java.util.Random;
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     //initial orientation
-    public static final String HORIZONTAL = "Horizontal";
+    public static final String INITIAL_ORIENTATION = "Horizontal";
 
     //current color
     private Color currentColor;
 
-    //colors for each type of file
+    //colors for each file type
     private Color documents = new Color(245,85,137);
     private Color spreadsheet = new Color(243,131,91);
     private Color slideshow = new Color(5,184,167);
@@ -63,6 +63,12 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         repaint();
     }
 
+    /* method to change the color scheme */
+    public void setColorScheme() {
+
+        repaint();
+    }
+
     /* function to generate a random color */
     public Color generateRandomColor() {
 
@@ -79,13 +85,13 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         return randomColor;
     }
 
+
     /* method to create the actual tree map */
     public void createTreeMap(File currentFolder) {
 
         //get the folders in the current folder
 
         //start with horizontal
-        HORIZONTAL;
 
         //divide the screen into how many there are
 

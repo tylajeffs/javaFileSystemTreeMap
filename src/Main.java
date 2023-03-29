@@ -11,7 +11,10 @@ public class Main extends JFrame implements ActionListener {
     
     private Vis mainPanel;
     public static final String CHOOSE_FOLDER = "Choose Folder";
-    public static final String CHOOSE_COLORS = "Choose Color Scheme";
+    public static final String RANDOM_COLORS = "Random Colors";
+    public static final String FILE_TYPE_COLORS = "File Type";
+    public static final String FILE_AGE_COLORS = "File Age";
+    public static final String NO_COLORS = "None";
 
 
     /* function to create a menu */
@@ -20,21 +23,23 @@ public class Main extends JFrame implements ActionListener {
         //set up initial menu
         JMenuBar mb = new JMenuBar();
         JMenu file = new JMenu("File");
+        JMenu colors = new JMenu("Colors");
 
         //set up items in the menu
         JMenuItem chooseFolder = new JMenuItem(CHOOSE_FOLDER);
         chooseFolder.addActionListener(this);
         chooseFolder.setActionCommand(CHOOSE_FOLDER);
 
-        JMenuItem chooseColors = new JMenuItem(CHOOSE_COLORS);
+        JMenuItem chooseColors = new JMenuItem(RANDOM_COLORS);
         chooseColors.addActionListener(this);
-        chooseColors.setActionCommand(CHOOSE_COLORS);
+        chooseColors.setActionCommand(RANDOM_COLORS);
 
         //add the menu items to the menu
         file.add(chooseFolder);
-        file.add(chooseColors);
+        colors.add(chooseColors);
 
         mb.add(file);
+        mb.add(colors);
 
         //return the created menu
         return mb;
@@ -89,11 +94,30 @@ public class Main extends JFrame implements ActionListener {
                 //call the main panel to create the tree map with the selected directory
                 mainPanel.createTreeMap(jfc.getSelectedFile());
                 break;
-            case CHOOSE_COLORS:
-                mainPanel.setCircleColor(Color.BLUE);   
+
+            case RANDOM_COLORS:
+
+                mainPanel.setColorScheme();      
                 break;
+
+            case FILE_TYPE_COLORS:
+
+                mainPanel.setColorScheme();
+                break;
+
+            case FILE_AGE_COLORS:
+
+                mainPanel.setColorScheme();
+                break;
+
+            case NO_COLORS:
+
+                mainPanel.setColorScheme();
+                break;
+
             default:
-                mainPanel.setCircleColor(Color.GREEN);
+                //random colors
+                mainPanel.setColorScheme();
                 break;
         }
     }
