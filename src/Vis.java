@@ -14,18 +14,18 @@ import java.util.List;
 
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
-    private Color milly;
+    private Color currentColor;
 
 
     public Vis() {
         super();
-        milly = Color.MAGENTA;
+        currentColor = Color.MAGENTA;
         addMouseListener(this);
         addMouseMotionListener(this);
     }
 
     public void setCircleColor(Color c) {
-        milly = c;
+        currentColor = c;
         repaint();
     }
 
@@ -40,7 +40,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         int h = getHeight();
 
         //draw some simple shapes
-        g.setColor(milly);
+        g.setColor(currentColor);
         g.fillOval(100, 100, 100, 100);
 
       

@@ -11,44 +11,46 @@ public class Main extends JFrame implements ActionListener {
 
     
     private Vis mainPanel;
-    public static final String SHERYL = "Sheryl";
-    public static final String TAKEYOSHI = "Takeyoshi";
-    public static final String JOE = "Joe";
-    public static final String BRANDON = "Brandon";
+    public static final String CHOOSE_FOLDER = "Choose Folder";
+    public static final String CHOOSE_COLORS = "Choose Color Scheme";
 
+
+    /* function to create a menu */
     private JMenuBar createMenu() {
+
+        //set up initial menu
         JMenuBar mb = new JMenuBar();
         JMenu file = new JMenu("File");
-        JMenu edit = new JMenu("Edit");
-        JMenuItem sheryl = new JMenuItem(SHERYL);
-        sheryl.addActionListener(this);
-        sheryl.setActionCommand(SHERYL);
-        JMenuItem takeyoshi = new JMenuItem(TAKEYOSHI);
-        takeyoshi.addActionListener(this);
-        takeyoshi.setActionCommand(TAKEYOSHI);
-        JMenuItem joe = new JMenuItem(JOE);
-        joe.addActionListener(this);
-        joe.setActionCommand(JOE);
-        JMenuItem brandon = new JMenuItem(BRANDON);
-        brandon.addActionListener(this);
-        brandon.setActionCommand(BRANDON);
-        file.add(sheryl);
-        file.add(takeyoshi);
-        edit.add(joe);
-        edit.add(brandon);
+
+        //set up items in the menu
+        JMenuItem chooseFolder = new JMenuItem(CHOOSE_FOLDER);
+        chooseFolder.addActionListener(this);
+        chooseFolder.setActionCommand(CHOOSE_FOLDER);
+
+        JMenuItem chooseColors = new JMenuItem(CHOOSE_COLORS);
+        chooseColors.addActionListener(this);
+        chooseColors.setActionCommand(CHOOSE_COLORS);
+
+        //add the menu items to the menu
+        file.add(chooseFolder);
+        file.add(chooseColors);
+
         mb.add(file);
-        mb.add(edit);
+
+        //return the created menu
         return mb;
     }
 
     public Main() {
 
         //add a menu bar and (time permitting) a toolbar
-        JMenuBar tyla = createMenu();
-        setJMenuBar(tyla);
+        JMenuBar mBar = createMenu();
+        setJMenuBar(mBar);
 
+        //set the panel 
         mainPanel = new Vis();
 
+        //panel settings
         setContentPane(mainPanel);
         setSize(800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,21 +62,20 @@ public class Main extends JFrame implements ActionListener {
         new Main();
     }
 
+    /* method to handle when user clicks on the menu */
     @Override
     public void actionPerformed(ActionEvent e) {
+
         System.out.println("a menu was clicked");
         String cmd = e.getActionCommand();
+
         switch (cmd) {
-            case SHERYL:
+            case CHOOSE_FOLDER:
                 mainPanel.setCircleColor(Color.RED);
                 break;
-            case TAKEYOSHI:
+            case CHOOSE_COLORS:
                 mainPanel.setCircleColor(Color.BLUE);   
                 break;
-            case JOE:
-                mainPanel.setCircleColor(Color.CYAN);
-                break;
-            case BRANDON:
             default:
                 mainPanel.setCircleColor(Color.GREEN);
                 break;
