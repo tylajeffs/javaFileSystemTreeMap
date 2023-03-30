@@ -36,6 +36,8 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     public Vis() {
         super();
         currentColor = Color.MAGENTA;
+        root = new Node(new File("/Users/tylajeffs/Downloads/favicon_io"));
+
         addMouseListener(this);
         addMouseMotionListener(this);
     }
@@ -46,15 +48,16 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         //typecast Graphics to Graphics2D
         Graphics2D g = (Graphics2D)g1;
 
-        //get the width and height of the screen
+        //g.setColor(generateRandomColor());
+        //g.fillOval(100,100,100,100);
         int w = getWidth();
         int h = getHeight();
 
-        g.setColor(generateRandomColor());
-        g.fillOval(100,100,100,100);
 
         //set one root node to start drawing        
-        //root.draw(0,0,getWidth(),getHeight(),g,INITIAL_ORIENTATION);
+        root.draw(0,0,w,h,g,INITIAL_ORIENTATION);
+        //root.drawTest(g);
+
     }
 
     /* method to set the current color */
@@ -74,21 +77,22 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         root = new Node(f);
     }
 
-          /* function to generate a random color */
-          public Color generateRandomColor() {
+    /* function to generate a random color */
+    public Color generateRandomColor() {
 
-            //initialize the randomness
-            Random rand = new Random();
-    
-            //generate 3 different values for the rgb of the color
-            float red = rand.nextFloat();
-            float green = rand.nextFloat();
-            float blue = rand.nextFloat();
-    
-            //create the color
-            Color randomColor = new Color(red, green, blue);
-            return randomColor;
-        }
+        //initialize the randomness
+        Random rand = new Random();
+
+        //generate 3 different values for the rgb of the color
+        float red = rand.nextFloat();
+        float green = rand.nextFloat();
+        float blue = rand.nextFloat();
+
+        //create the color
+        Color randomColor = new Color(red, green, blue);
+        return randomColor;
+
+    }
 
 
     @Override
