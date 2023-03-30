@@ -51,34 +51,22 @@ public class Node {
     /* method to draw the treemap */
     public void draw(int left, int top, int w, int h, Graphics2D g, String orientation) {
 
-        System.out.println("entered the draw method");
-
         //check if node is a file or folder
         if(this.children.isEmpty()) {
 
-            System.out.println("Left: " + left);
-            System.out.println("Top: " + top);
-            System.out.println("Width: " + w);
-            System.out.println("Height: " + h);
-
             //this is a file, set the color and draw the rectangle
             g.setColor(generateRandomColor());
-            g.fillRect(left,top,w,h);
-
-
-            
+            g.fillRect(left,top,w,h);  
 
         } else {
             //this is a folder
-
             //check orientation
             if(orientation.equals("HORIZONTAL")) {
-
-                System.out.println("Folder, horizontal");
 
                 //get the ratio of how many pixels per byte
                 double pixelsPerByte = ((double)w/(double)this.size);
 
+                //loop through all the kids
                 for (Node kid: this.children) {
                     //figure out how many pixels each child gets
                     double pixelsForChild = kid.size * pixelsPerByte;
@@ -92,11 +80,11 @@ public class Node {
 
             } else {
                 //vertical
-                long pixelsPerByte = h/size;
+                double pixelsPerByte = ((double)h/(double)this.size);
 
                 for (Node kid: this.children) {
                     //figure out how many pixels each child gets
-                    long pixelsForChild = kid.size * pixelsPerByte;
+                    double pixelsForChild = kid.size * pixelsPerByte;
 
                     //draw the child node using the pixels as the height
                     kid.draw(left, top, w, (int)pixelsForChild, g, "HORIZONTAL");
@@ -110,11 +98,6 @@ public class Node {
     }
 
 
-
-    public void drawTest(Graphics2D g) {
-        g.setColor(Color.MAGENTA);
-        g.fillOval(100, 100, 100, 100);
-    }
 
     /* function to generate a random color */
     public Color generateRandomColor() {

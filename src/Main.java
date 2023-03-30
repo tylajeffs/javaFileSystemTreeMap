@@ -97,27 +97,27 @@ public class Main extends JFrame implements ActionListener {
 
             case RANDOM_COLORS:
 
-                mainPanel.setColorScheme();      
+          
                 break;
 
             case FILE_TYPE_COLORS:
 
-                mainPanel.setColorScheme();
+         
                 break;
 
             case FILE_AGE_COLORS:
 
-                mainPanel.setColorScheme();
+         
                 break;
 
             case NO_COLORS:
 
-                mainPanel.setColorScheme();
+             
                 break;
 
             default:
                 //random colors
-                mainPanel.setColorScheme();
+    
                 break;
         }
     }
