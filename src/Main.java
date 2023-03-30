@@ -30,13 +30,28 @@ public class Main extends JFrame implements ActionListener {
         chooseFolder.addActionListener(this);
         chooseFolder.setActionCommand(CHOOSE_FOLDER);
 
-        JMenuItem chooseColors = new JMenuItem(RANDOM_COLORS);
-        chooseColors.addActionListener(this);
-        chooseColors.setActionCommand(RANDOM_COLORS);
+        JMenuItem randomColors = new JMenuItem(RANDOM_COLORS);
+        randomColors.addActionListener(this);
+        randomColors.setActionCommand(RANDOM_COLORS);
+
+        JMenuItem fileTypeColors = new JMenuItem(FILE_TYPE_COLORS);
+        fileTypeColors.addActionListener(this);
+        fileTypeColors.setActionCommand(FILE_TYPE_COLORS);
+
+        JMenuItem fileAgeColors = new JMenuItem(FILE_AGE_COLORS);
+        fileAgeColors.addActionListener(this);
+        fileAgeColors.setActionCommand(FILE_AGE_COLORS);
+
+        JMenuItem noColors = new JMenuItem(NO_COLORS);
+        noColors.addActionListener(this);
+        noColors.setActionCommand(NO_COLORS);
 
         //add the menu items to the menu
         file.add(chooseFolder);
-        colors.add(chooseColors);
+        colors.add(randomColors);
+        colors.add(fileTypeColors);
+        colors.add(fileAgeColors);
+        colors.add(noColors);
 
         mb.add(file);
         mb.add(colors);

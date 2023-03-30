@@ -6,20 +6,29 @@ import java.util.Random;
 
 
 
+
 public class Node {
     long size = 0;
     ArrayList<Node> children = new ArrayList<>();
+    String filePath;
+    String fileType = "";
+    String currentColorScheme = "RANDOM_COLORS";
 
     public Node(File f) {
 
-        //System.out.println("Current node: " + f.getName());
+        //get the file path
+        filePath = f.getPath();
 
         //check if the node is a file or a folder
         if (f.isFile()) {
             //get the size in bytes of the file 
             size = f.length();
-            //System.out.println("This node is a file");
-            //System.out.println("File size: " + size);
+
+            //get the file type
+            int i = filePath.lastIndexOf('.');
+            if (i > 0) {
+                fileType = filePath.substring(i+1);
+            }
 
         } else {
             //it's a folder
@@ -55,7 +64,7 @@ public class Node {
         if(this.children.isEmpty()) {
 
             //this is a file, set the color and draw the rectangle
-            g.setColor(generateRandomColor());
+            g.setColor(generateColor());
             g.fillRect(left,top,w,h);  
 
         } else {
@@ -97,7 +106,115 @@ public class Node {
 
     }
 
+    public Color generateColor() {
 
+        Color toReturn = Color.gray;
+
+        switch (currentColorScheme) {
+            case "RANDOM_COLORS":
+                toReturn = generateRandomColor();
+          
+                break;
+
+            case "FILE_TYPE_COLORS":
+                //check what type the file is
+                switch (fileType) {
+                    //images
+                    case "jpg":
+                    case "png": 
+                    case "jpeg":
+                    case "gif":
+                        toReturn = new Color(3, 252, 86); //bright green
+                        break;
+                    //spreadsheets
+                    case "dat":
+                    case "csv":
+                    case "tsv":
+                    case "xls":
+                    case "xlsx":
+                    case "ods":
+                        toReturn = new Color(210, 3, 252); //bright purple
+                        break;
+                    //documents
+                    case "doc":
+                    case "docx":
+                    case "pdf": 
+                        toReturn = new Color(252, 248, 3); //bright yellow
+                        break;
+                    //slideshows
+                    case "ppt":
+                    case "pptx":
+                        toReturn = new Color(3, 186, 252); //sky blue
+                        break;
+                    //plain text
+                    case "txt":
+                        toReturn = new Color(252, 161, 3); //orange
+                        break;
+                    //audio video
+                    case "mp3":
+                    case "wav":
+                    case "aac":
+                    case "mp4":
+                    case "mov":
+                        toReturn = new Color(252, 3, 3); //red
+                        break;
+                    //executables
+                    case "exe":
+                    case "":
+                        toReturn = new Color(252, 161, 3); //orange
+                        break;
+                    //source code
+                    case "c":
+                    case "java":
+                    case "py":
+                    case "cs":
+                    case "php":
+                    case "vb":
+                    case "class":
+                    case "css":
+                    case "html":
+                    case "js":
+                    case "jsx":
+                        toReturn = new Color(250, 137, 242); //pink
+                        break;
+                    //object code
+                    case "o":
+                    case "obj":
+                        toReturn = new Color(42, 8, 156); //dark blue
+                        break;
+                    //any other type of file
+                    default:
+                    toReturn = new Color(186, 146, 214); //light purple
+
+                }
+         
+                break;
+
+            case "FILE_AGE_COLORS":
+
+         
+                break;
+
+            case "NO_COLORS":
+
+             
+                break;
+
+            default:
+                //random colors
+                toReturn = generateRandomColor();
+    
+                break;
+        }
+
+        return toReturn;
+
+    }
+
+    /* function to set the color scheme */
+    public void setColorScheme(String s) {
+        currentColorScheme = s;
+    }
 
     /* function to generate a random color */
     public Color generateRandomColor() {
