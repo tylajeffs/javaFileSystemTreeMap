@@ -92,7 +92,7 @@ public class Main extends JFrame implements ActionListener {
                 }
 
                 //call the main panel to create the tree map with the selected directory
-                mainPanel.createTreeMap(jfc.getSelectedFile());
+                mainPanel.setRootNode(jfc.getSelectedFile());
                 break;
 
             case RANDOM_COLORS:

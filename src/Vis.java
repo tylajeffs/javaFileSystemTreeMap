@@ -1,23 +1,21 @@
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.Stroke;
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
 
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
+    //base node
+    private Node root;
+
     //initial orientation
-    public static final String INITIAL_ORIENTATION = "Horizontal";
+    public static final String INITIAL_ORIENTATION = "HORIZONTAL";
 
     //current color
     private Color currentColor;
@@ -52,9 +50,11 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         int w = getWidth();
         int h = getHeight();
 
-        //draw some simple shapes
-        g.setColor(currentColor);
-        g.fillOval(100, 100, 100, 100);
+        g.setColor(generateRandomColor());
+        g.fillOval(100,100,100,100);
+
+        //set one root node to start drawing        
+        //root.draw(0,0,getWidth(),getHeight(),g,INITIAL_ORIENTATION);
     }
 
     /* method to set the current color */
@@ -69,43 +69,27 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         repaint();
     }
 
-    /* function to generate a random color */
-    public Color generateRandomColor() {
-
-        //initialize the randomness
-        Random rand = new Random();
-
-	    //generate 3 different values for the rgb of the color
-	    float red = rand.nextFloat();
-	    float green = rand.nextFloat();
-	    float blue = rand.nextFloat();
-
-        //create the color
-	    Color randomColor = new Color(red, green, blue);
-        return randomColor;
+    /* method to set the root node */
+    public void setRootNode(File f) {
+        root = new Node(f);
     }
 
+          /* function to generate a random color */
+          public Color generateRandomColor() {
 
-    /* method to create the actual tree map */
-    public void createTreeMap(File currentFolder) {
-
-        //get the folders in the current folder
-
-        //start with horizontal
-
-        //divide the screen into how many there are
-
-        //pick a color
-
-        //make a recursive call
-
-
-        repaint();
-
-    }
-
-
+            //initialize the randomness
+            Random rand = new Random();
     
+            //generate 3 different values for the rgb of the color
+            float red = rand.nextFloat();
+            float green = rand.nextFloat();
+            float blue = rand.nextFloat();
+    
+            //create the color
+            Color randomColor = new Color(red, green, blue);
+            return randomColor;
+        }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
