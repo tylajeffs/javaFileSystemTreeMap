@@ -55,6 +55,8 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
     /* method to set the root node */
     public void setRootNode(File f) {
         root = new Node(f);
+        System.out.println("set a new root node: " + root.toString());
+        repaint();
     }
 
 
