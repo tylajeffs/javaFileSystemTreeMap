@@ -12,22 +12,10 @@ import java.util.Random;
 public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     //base node
-    private Node root;
+    public Node root;
 
     //initial orientation
     public static final String INITIAL_ORIENTATION = "HORIZONTAL";
-
-    //colors for each file type
-    private Color documents = new Color(245,85,137);
-    private Color spreadsheet = new Color(243,131,91);
-    private Color slideshow = new Color(5,184,167);
-    private Color plainText = new Color(0,213,211);
-    private Color executable = new Color(214,218,2);
-    private Color sourceCode = new Color(159,194,31);
-    private Color objectCode = new Color(23,143,193);
-    private Color image = new Color(182,151,214);
-    private Color audio = new Color(172,228,220);
-    private Color otherFileType = new Color(102,143,30);
 
 
     public Vis() {
@@ -51,6 +39,7 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         //set one root node to start drawing        
         root.draw(0,0,w,h,g,INITIAL_ORIENTATION);
     }
+
 
     /* method to set the root node */
     public void setRootNode(File f) {

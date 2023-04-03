@@ -12,7 +12,7 @@ public class Node {
     ArrayList<Node> children = new ArrayList<>();
     String filePath;
     String fileType = "";
-    String currentColorScheme = "RANDOM_COLORS";
+    String currentColorScheme = "Random Colors";
 
     public Node(File f) {
 
@@ -63,9 +63,11 @@ public class Node {
         //check if node is a file or folder
         if(this.children.isEmpty()) {
 
-            //this is a file, set the color and draw the rectangle
+            //this is a file, set the color and draw the rectangle (with a black border)
             g.setColor(generateColor());
             g.fillRect(left,top,w,h);  
+            g.setColor(Color.BLACK);
+            g.drawRect(left,top,w,h);
 
         } else {
             //this is a folder
@@ -106,17 +108,31 @@ public class Node {
 
     }
 
+    /* function to set the color scheme for each of the nodes in the tree */
+    public void setTreeColorScheme(String s) {
+        //set color scheme
+        currentColorScheme = s;
+
+        //go through all the kids and set the color scheme
+        for (Node kid: this.children) {
+            kid.setTreeColorScheme(s);
+        }
+
+    }
+
+
+    /* function to genereate the correct color for the rectangles */
     public Color generateColor() {
 
         Color toReturn = Color.gray;
 
         switch (currentColorScheme) {
-            case "RANDOM_COLORS":
+            case "Random Colors":
                 toReturn = generateRandomColor();
           
                 break;
 
-            case "FILE_TYPE_COLORS":
+            case "File Type":
                 //check what type the file is
                 switch (fileType) {
                     //images
@@ -185,9 +201,7 @@ public class Node {
                     //any other type of file
                     default:
                     toReturn = new Color(186, 146, 214); //light purple
-
                 }
-         
                 break;
 
             case "FILE_AGE_COLORS":
@@ -203,18 +217,17 @@ public class Node {
             default:
                 //random colors
                 toReturn = generateRandomColor();
+                System.out.println("Just picked default (random) colors");
     
                 break;
         }
 
+        //System.out.println("COLOR: " + toReturn.toString());
         return toReturn;
 
     }
 
-    /* function to set the color scheme */
-    public void setColorScheme(String s) {
-        currentColorScheme = s;
-    }
+    
 
     /* function to generate a random color */
     public Color generateRandomColor() {

@@ -16,6 +16,8 @@ public class Main extends JFrame implements ActionListener {
     public static final String FILE_AGE_COLORS = "File Age";
     public static final String NO_COLORS = "None";
 
+    public String currentColorScheme = "Random Colors";
+
 
     /* function to create a menu */
     private JMenuBar createMenu() {
@@ -111,12 +113,18 @@ public class Main extends JFrame implements ActionListener {
                 break;
 
             case RANDOM_COLORS:
-
+                System.out.println("Switching to random colors");
+                mainPanel.root.setTreeColorScheme(RANDOM_COLORS);
+                //currentColorScheme = RANDOM_COLORS;
+                repaint();
           
                 break;
 
             case FILE_TYPE_COLORS:
-
+                System.out.println("Switching to file type colors");
+                mainPanel.root.setTreeColorScheme(FILE_TYPE_COLORS);
+                //currentColorScheme = FILE_TYPE_COLORS;
+                repaint();
          
                 break;
 
