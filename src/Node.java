@@ -32,9 +32,6 @@ public class Node {
 
         } else {
             //it's a folder
-
-            //System.out.println("This node is a folder");
-
             //go through each of the children in the folder
             for (File child: f.listFiles()) {
 
@@ -44,14 +41,9 @@ public class Node {
                 //recursion for each child 
                 Node kid = new Node(child);
 
-                //System.out.println("Child size: " + child.length());
-                //System.out.println("Current folder size: " + size);
-
                 //add the kid to the children arraylist
                 children.add(kid);
             }
-
-
 
         }
 
@@ -204,14 +196,13 @@ public class Node {
                 }
                 break;
 
-            case "FILE_AGE_COLORS":
+            case "File Age":
 
          
                 break;
 
-            case "NO_COLORS":
-
-             
+            case "None":
+                toReturn = Color.WHITE;
                 break;
 
             default:

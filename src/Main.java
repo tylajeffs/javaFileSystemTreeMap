@@ -113,29 +113,27 @@ public class Main extends JFrame implements ActionListener {
                 break;
 
             case RANDOM_COLORS:
-                System.out.println("Switching to random colors");
+                //set the color scheme to random colors
                 mainPanel.root.setTreeColorScheme(RANDOM_COLORS);
-                //currentColorScheme = RANDOM_COLORS;
                 repaint();
-          
                 break;
 
             case FILE_TYPE_COLORS:
-                System.out.println("Switching to file type colors");
+                //set the color scheme to file type based colors
                 mainPanel.root.setTreeColorScheme(FILE_TYPE_COLORS);
-                //currentColorScheme = FILE_TYPE_COLORS;
                 repaint();
-         
                 break;
 
             case FILE_AGE_COLORS:
-
-         
+                //set the color scheme to file age based colors
+                mainPanel.root.setTreeColorScheme(FILE_AGE_COLORS);
+                repaint();
                 break;
 
             case NO_COLORS:
-
-             
+                //set the color scheme to no colors
+                mainPanel.root.setTreeColorScheme(NO_COLORS);
+                repaint();
                 break;
 
             default:
