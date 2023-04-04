@@ -6,8 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.attribute.FileTime;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 import java.util.Date.*;
 
@@ -53,25 +56,28 @@ public class Node {
             } catch (java.text.ParseException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("File Age: " + lastModified.toString());
             
-
-
         } else {
             //it's a folder
-            //go through each of the children in the folder
-            for (File child: f.listFiles()) {
+            try {
+                //go through each of the children in the folder
+                for (File child: f.listFiles()) {
 
-                //add the size of the kids to the folder size
-                size += child.length();
+                    //add the size of the kids to the folder size
+                    size += child.length();
 
-                //recursion for each child 
-                Node kid = new Node(child);
+                    //recursion for each child 
+                    Node kid = new Node(child);
 
-                //add the kid to the children arraylist
-                children.add(kid);
+                    //add the kid to the children arraylist
+                    children.add(kid);
+                }
+
+            } catch (java.lang.NullPointerException e) {
+                System.out.println("There was an issue with the folder!");
+                e.printStackTrace();
             }
+            
 
         }
 
@@ -224,9 +230,21 @@ public class Node {
                 }
                 break;
 
-            case "File Age":
-
-         
+            case "File Age":  
+                //check file age in comparison to today (lighter is more recent)
+                if(lastModified.compareTo(getLastWeek()) >= 0) {
+                    //modified in the past week
+                    toReturn = new Color(204,249,255);
+                } else if(lastModified.compareTo(getLastMonth()) >= 0) {
+                    //modified in the past month
+                    toReturn = new Color(124,231,255);
+                } else if(lastModified.compareTo(getLastYear()) >= 0) {
+                    //modified in the past year
+                    toReturn = new Color(4,171,223);
+                } else {
+                    //it's been over a year since it was modified
+                    toReturn = new Color(0,128,191);
+                }
                 break;
 
             case "None":
@@ -246,7 +264,23 @@ public class Node {
 
     }
 
-    
+    /* function to get the date of last week */
+    public static Date getLastWeek() {
+        return Date.from(ZonedDateTime.now().minusWeeks(1).toInstant());
+    }
+
+    /* function to get the date of last month */
+    public static Date getLastMonth() {
+        return Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
+    }
+
+    /* function to get the date of last year */
+    public static Date getLastYear() {
+        return Date.from(ZonedDateTime.now().minusYears(1).toInstant());
+    }
+
+
+
 
     /* function to generate a random color */
     public Color generateRandomColor() {
