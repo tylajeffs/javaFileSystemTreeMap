@@ -1,9 +1,15 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
-
+import java.util.Date.*;
 
 
 
@@ -13,7 +19,14 @@ public class Node {
     String filePath;
     String fileType = "";
     String currentColorScheme = "Random Colors";
+    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy hh:mm a");
+    String ageString = "";
+    Date lastModified = new Date();
+    
 
+
+
+    /* constructor, initial setup */
     public Node(File f) {
 
         //get the file path
@@ -29,6 +42,21 @@ public class Node {
             if (i > 0) {
                 fileType = filePath.substring(i+1);
             }
+
+            //get the file age (from last modification) in milliseconds
+            long numAge = f.lastModified();
+            //convert the milliseconds age into the date format and store in string
+            ageString = sdf.format(numAge);
+            //parse the string into a date object
+            try {
+                lastModified = sdf.parse(ageString);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("File Age: " + lastModified.toString());
+            
+
 
         } else {
             //it's a folder
