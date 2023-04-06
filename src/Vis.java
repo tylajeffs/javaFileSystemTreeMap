@@ -13,7 +13,9 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     //base node
     public Node root;
-
+    Node currentNode;
+    int mouseX = 0;
+    int mouseY = 0;
     //initial orientation
     public static final String INITIAL_ORIENTATION = "HORIZONTAL";
 
@@ -39,6 +41,8 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
         //set one root node to start drawing        
         root.draw(0,0,w,h,g,INITIAL_ORIENTATION);
     }
+
+
 
 
     /* method to set the root node */
@@ -81,7 +85,18 @@ public class Vis extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-     
+        
+        //get the x and y of the mouse
+        mouseX = e.getX();
+        mouseY = e.getY();
+
+        currentNode = root.getNodeAt(mouseX,mouseY);
+        System.out.println("Current Node: " + currentNode.filePath);
+
+        //display the file path and the size of the node
+        setToolTipText("File Path: " + currentNode.filePath + "\nFile Size: " + currentNode.size);
+
+        
     }   
 
 }

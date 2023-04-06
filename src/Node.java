@@ -1,18 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.attribute.FileTime;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Random;
-import java.util.Date.*;
 
 
 
@@ -23,8 +17,9 @@ public class Node {
     String fileType = "";
     String currentColorScheme = "Random Colors";
     SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy hh:mm a");
-    String ageString = "";
     Date lastModified = new Date();
+    Rectangle nodeRectangle = new Rectangle();
+
     
 
 
@@ -49,7 +44,7 @@ public class Node {
             //get the file age (from last modification) in milliseconds
             long numAge = f.lastModified();
             //convert the milliseconds age into the date format and store in string
-            ageString = sdf.format(numAge);
+            String ageString = sdf.format(numAge);
             //parse the string into a date object
             try {
                 lastModified = sdf.parse(ageString);
@@ -77,8 +72,6 @@ public class Node {
                 System.out.println("There was an issue with the folder!");
                 e.printStackTrace();
             }
-            
-
         }
 
     }
@@ -95,8 +88,13 @@ public class Node {
             g.setColor(Color.BLACK);
             g.drawRect(left,top,w,h);
 
+            //save the rectangle coordinates
+            nodeRectangle = new Rectangle(left,top,w,h);
+
         } else {
             //this is a folder
+            //save the rectangle coordinates
+            nodeRectangle = new Rectangle(left,top,w,h);
             //check orientation
             if(orientation.equals("HORIZONTAL")) {
 
@@ -297,6 +295,22 @@ public class Node {
             Color randomColor = new Color(red, green, blue);
             return randomColor;
         }
+
+
+        /* function to check if the mouse is hovering on the node */
+        public Node getNodeAt(int mouseX, int mouseY) {
+
+            Node result = this;
+
+            for(Node child: this.children) {
+                if(child.nodeRectangle.contains(mouseX,mouseY)) {
+                    System.out.println("entered the contains");
+                    result = child.getNodeAt(mouseX, mouseY);
+                }
+            }
+            return result;
+        }
+
 
 }
  
