@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
-
 public class Main extends JFrame implements ActionListener {
 
     private Vis mainPanel;
