@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
@@ -8,14 +7,12 @@ import javax.swing.filechooser.FileSystemView;
 
 public class Main extends JFrame implements ActionListener {
 
-    
     private Vis mainPanel;
     public static final String CHOOSE_FOLDER = "Choose Folder";
     public static final String RANDOM_COLORS = "Random Colors";
     public static final String FILE_TYPE_COLORS = "File Type";
     public static final String FILE_AGE_COLORS = "File Age";
     public static final String NO_COLORS = "None";
-
     public String currentColorScheme = "Random Colors";
 
 
@@ -86,13 +83,11 @@ public class Main extends JFrame implements ActionListener {
     /* method to handle when user clicks on the menu */
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        System.out.println("a menu was clicked");
+        //get the button that was pressed
         String cmd = e.getActionCommand();
 
         switch (cmd) {
             case CHOOSE_FOLDER:
-                
                 //pop up a window where user can select a folder
                 JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
                 jfc.setDialogTitle("Choose a folder");
@@ -138,7 +133,6 @@ public class Main extends JFrame implements ActionListener {
 
             default:
                 //random colors
-    
                 break;
         }
     }

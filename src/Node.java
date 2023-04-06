@@ -20,9 +20,6 @@ public class Node {
     Date lastModified = new Date();
     Rectangle nodeRectangle = new Rectangle();
 
-    
-
-
 
     /* constructor, initial setup */
     public Node(File f) {
@@ -153,7 +150,6 @@ public class Node {
         switch (currentColorScheme) {
             case "Random Colors":
                 toReturn = generateRandomColor();
-          
                 break;
 
             case "File Type":
@@ -252,8 +248,6 @@ public class Node {
             default:
                 //random colors
                 toReturn = generateRandomColor();
-                System.out.println("Just picked default (random) colors");
-    
                 break;
         }
 
@@ -297,19 +291,19 @@ public class Node {
         }
 
 
-        /* function to check if the mouse is hovering on the node */
-        public Node getNodeAt(int mouseX, int mouseY) {
+    /* function to check if the mouse is hovering on the node */
+    public Node getNodeAt(int mouseX, int mouseY) {
 
-            Node result = this;
+        Node result = this;
 
-            for(Node child: this.children) {
-                if(child.nodeRectangle.contains(mouseX,mouseY)) {
-                    System.out.println("entered the contains");
-                    result = child.getNodeAt(mouseX, mouseY);
-                }
+        //loop through all the kids recursively
+        for(Node child: this.children) {
+            if(child.nodeRectangle.contains(mouseX,mouseY)) {
+                result = child.getNodeAt(mouseX, mouseY);
             }
-            return result;
         }
+        return result;
+    }
 
 
 }
